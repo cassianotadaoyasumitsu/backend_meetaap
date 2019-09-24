@@ -103,7 +103,7 @@ class MeetupController {
 
     await meetup.destroy();
 
-    return res.send();
+    return res.send('Deleted!');
   }
 }
 

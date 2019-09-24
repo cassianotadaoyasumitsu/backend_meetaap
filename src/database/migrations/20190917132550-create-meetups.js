@@ -12,7 +12,7 @@ module.exports = {
         references: { model: 'files', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        allowNull: true,
+        allowNull: false,
       },
       user_id: {
         type: Sequelize.INTEGER,
