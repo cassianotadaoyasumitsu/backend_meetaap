@@ -5,13 +5,12 @@ import multerConfig from './config/multer';
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 
+import authMiddleware from './app/middlewares/auth';
 import FileController from './app/controllers/FileController';
 import HostController from './app/controllers/HostController';
 import MeetupController from './app/controllers/MeetupController';
 import OrganizingController from './app/controllers/OrganizingController';
 import SubscriptionController from './app/controllers/SubscriptionController';
-
-import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 

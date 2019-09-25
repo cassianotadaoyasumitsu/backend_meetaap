@@ -8,6 +8,8 @@ class Subscription extends Model {
         sequelize,
       }
     );
+
+    return this;
   }
 
   static associate(models) {
@@ -16,4 +18,4 @@ class Subscription extends Model {
   }
 }
 
-export default new Subscription();
+export default Subscription;

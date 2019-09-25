@@ -12,22 +12,31 @@ const models = [User, File, Meetup, Subscription];
 
 class Database {
   constructor() {
+    this.connection = new Sequelize(databaseConfig);
+
+    const { MONGO_HOST, MONGO_PORT, MONGO_NAME } = process.env;
+
+    const mongoURI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_NAME}`;
+
+    this.mongoConnection = mongoose.connect(mongoURI, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useFindAndModify: true,
+    });
+
     this.init();
-    this.mongo();
+    this.associate();
   }
 
   init() {
-    this.connection = new Sequelize(databaseConfig);
-
-    models
-      .map(model => model.init(this.connection))
-      .map(model => model.associate && model.associate(this.connection.models));
+    models.forEach(model => model.init(this.connection));
   }
 
-  mongo() {
-    this.mongoConnection = mongoose.connect(process.env.MONGO_URL, {
-      useNewUrlParser: true,
-      useFindAndModify: true,
+  associate() {
+    models.forEach(model => {
+      if (model.associate) {
+        model.associate(this.connection.models);
+      }
     });
   }
 }
